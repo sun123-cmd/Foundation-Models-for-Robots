@@ -58,9 +58,9 @@ pip install --no-cache-dir -r piprequirments.txt -i https://pypi.tuna.tsinghua.e
 python3 -m pip install tensorflow[and-cuda]
 pip install --upgrade "jax[cuda11_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
 
-# You need to change laoding path into adddisk1/yourusername instead of /usr/xxx/
-# You need to build local cuda>=11.0, instead of just building in conda env
-# Run distributed code
+#You need to change laoding path into adddisk1/yourusername instead of /usr/xxx/
+#You need to build local cuda>=11.0, instead of just building in conda env
+#Run distributed code
 python -m robotics_transformer.distribute_train
 ```
 ### Using trained checkpoints
