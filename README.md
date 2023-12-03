@@ -32,25 +32,34 @@ You can view the google source code here: [robotics_transformer](https://github.
 
 Both datasets are in [RLDS](https://arxiv.org/abs/2111.02767) format
 
-### Installation
-Clone the repo
-
-Before running, you need to resolve the tensorflow version compatibility issues in [tensor2robot](https://github.com/google-research/tensor2robot), see my answer [contrib_answer](https://github.com/google-research/robotics_transformer/issues/1#issuecomment-1673121690)
-```bash
-git clone https://github.com/YiyangHuang-work/RT-1
-# clone the repo rt-1 used
-cd RT-1
+# Clone the repository
+cd Foundation-Models-for-Robots-main
 git clone https://github.com/google-research/tensor2robot
 
-# Install protoc and compile the protobufs.
+# Install protobuf using pip
 pip install protobuf
+
+# Navigate to the proto directory
 cd tensor2robot/proto
-protoc -I=./ --python_out=`pwd` tensor2robot/t2r.proto
 
-# Optional: Create a conda env,you can also follow google's instructions for configuration
+# Compile the protobuf file
+protoc -I=./ --python_out=`pwd` t2r.proto
+
+# Move back to the original directory
 cd ../..
-conda env create -f RT-1/rt_environment.yaml
 
+# Create a conda environment from the provided YAML file
+conda env create -f tf-rt1_environment.yaml
+
+# while creating new enviroonment, the memory of /home disk may too small to load
+# install others by pip in conda env without pip cache can solve it
+conda activate tf-rt1
+pip install --no-cache-dir -r piprequirments.txt -i https://pypi.tuna.tsinghua.edu.cn/simpl
+python3 -m pip install tensorflow[and-cuda]
+pip install --upgrade "jax[cuda11_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+
+# You need to change laoding path into adddisk1/yourusername instead of /usr/xxx/
+# You need to build local cuda>=11.0, instead of just building in conda env
 # Run distributed code
 python -m robotics_transformer.distribute_train
 ```
