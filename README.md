@@ -32,35 +32,40 @@ You can view the google source code here: [robotics_transformer](https://github.
 
 Both datasets are in [RLDS](https://arxiv.org/abs/2111.02767) format
 
-# Clone the repository
+* **Clone the repository**
+```
 cd Foundation-Models-for-Robots-main
 git clone https://github.com/google-research/tensor2robot
+```
+* **Install protobuf using pip**
 
-# Install protobuf using pip
+```
 pip install protobuf
-
-# Navigate to the proto directory
 cd tensor2robot/proto
+```
 
-# Compile the protobuf file
+* **Compile the protobuf file**
+  
+```
 protoc -I=./ --python_out=`pwd` t2r.proto
-
-# Move back to the original directory
 cd ../..
+```
+* **Create a conda environment from the provided YAML file**
+  
+`conda env create -f tf-rt1_environment.yaml`
 
-# Create a conda environment from the provided YAML file
-conda env create -f tf-rt1_environment.yaml
-
-# while creating new enviroonment, the memory of /home disk may too small to load
-# install others by pip in conda env without pip cache can solve it
+while creating new enviroonment, the memory of /home disk may too small to load
+* **install others by pip in conda env without pip cache can solve it**
+```
 conda activate tf-rt1
 pip install --no-cache-dir -r piprequirments.txt -i https://pypi.tuna.tsinghua.edu.cn/simpl
 python3 -m pip install tensorflow[and-cuda]
 pip install --upgrade "jax[cuda11_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
-
-# Run distributed code
-python -m robotics_transformer.distribute_train
 ```
+* **Run distributed code**
+* 
+`python -m robotics_transformer.distribute_train`
+
 ### Using trained checkpoints
 Checkpoints are included in trained_checkpoints/ folder for three models:
 1. [RT-1 trained on 700 tasks](trained_checkpoints/rt1main)
