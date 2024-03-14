@@ -63,7 +63,7 @@ python3 -m pip install tensorflow[and-cuda]
 pip install --upgrade "jax[cuda11_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
 ```
 * **Run distributed code**
-* 
+
 `python -m robotics_transformer.distribute_train`
 
 ### Using trained checkpoints
